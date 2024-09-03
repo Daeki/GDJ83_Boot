@@ -11,12 +11,11 @@ import com.winter.app.notice.NoticeMapper;
 @Controller
 public class HomeController {
 	
-	@Autowired
-	private NoticeMapper noticeDAO;
+
 
 	@GetMapping("/")
 	public String home()throws Exception{
-		noticeDAO.getList();
+	
 		return "index";
 	}
 
