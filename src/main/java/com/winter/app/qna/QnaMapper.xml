@@ -25,8 +25,16 @@
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<insert id="add" parameterType="QnaVO">
+	<insert id="add" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="boardNum">
 		INSERT INTO QNA
 		VALUES (#{boardNum}, #{boardWriter}, #{boardTitle}, #{boardContents}, now(), #{ref}, 0, 0)
 	</insert>
+	
+	<update id="refUpdate" parameterType="QnaVO">
+		UPDATE QNA SET REF=#{boardNum} WHERE BOARD_NUM=#{boardNum}
+	</update>
+	
+	<select id="getDetail" parameterType="QnaVO" resultType="QnaVO">
+		SELECT * FROM QNA WHERE BOARD_NUM=#{boardNum}
+	</select>
 </mapper>  
