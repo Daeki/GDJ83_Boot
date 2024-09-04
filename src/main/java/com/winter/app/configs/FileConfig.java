@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 
 //WebMVCConfigure 구현
 @Configuration
-@Component
 @Slf4j
 public class FileConfig implements WebMvcConfigurer {
 	@Value("${app.url.path}")
