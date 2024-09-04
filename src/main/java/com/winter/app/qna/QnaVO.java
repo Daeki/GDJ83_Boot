@@ -1,6 +1,7 @@
 package com.winter.app.qna;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,5 +15,6 @@ public class QnaVO {
 	private Long ref;
 	private Long step;
 	private Long depth;
+	private List<QnaFileVO> ar;
 
 }

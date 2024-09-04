@@ -8,6 +8,8 @@ import com.winter.app.util.Pager;
 
 @Mapper
 public interface QnaMapper {
+	
+	public int addFile(QnaFileVO qnaFileVO)throws Exception;
 
 	public List<QnaVO> getList(Pager pager)throws Exception;
 	

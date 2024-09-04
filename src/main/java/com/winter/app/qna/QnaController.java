@@ -33,6 +33,7 @@ public class QnaController {
 		return this.board;
 	}
 	
+	
 	@GetMapping("list")
 	public void getList(Pager pager, Model model)throws Exception{
 		List<QnaVO> ar = qnaService.getList(pager);
