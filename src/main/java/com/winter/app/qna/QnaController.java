@@ -56,6 +56,7 @@ public class QnaController {
 	public void getDetail(QnaVO qnaVO, Model model)throws Exception{
 		qnaVO = qnaService.getDetail(qnaVO);
 		model.addAttribute("vo", qnaVO);
+		
 	}
 	
 	@GetMapping("fileDown")

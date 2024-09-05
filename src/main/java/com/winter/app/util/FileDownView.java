@@ -17,13 +17,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
+//BeanNameViewResolve
 public class FileDownView extends AbstractView {
 	@Value("${app.upload}")
 	private String path;//D:/upload/
 	
+	
+	
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		
 		QnaFileVO qnaFileVO = (QnaFileVO) model.get("file");
 		String directory = (String) model.get("board");
