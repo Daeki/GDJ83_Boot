@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.util.FileManager;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional(rollbackFor = Exception.class)
 public class QnaService {
 	
 	@Autowired
@@ -33,11 +35,16 @@ public class QnaService {
 		return qnaMapper.getList(pager);
 	}
 	
+	
 	public int add(QnaVO qnaVO, MultipartFile [] attaches)throws Exception{
 		
 		int result=qnaMapper.add(qnaVO);
 		
 		result = qnaMapper.refUpdate(qnaVO);
+		
+		if(result==0) {
+			throw new Exception();
+		}
 		
 		//파일을 HDD에 저장 후 DB에 정보를 추가
 		for(MultipartFile mf: attaches) {

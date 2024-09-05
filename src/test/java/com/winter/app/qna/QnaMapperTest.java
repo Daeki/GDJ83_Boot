@@ -7,16 +7,20 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.winter.app.util.Pager;
 
 @SpringBootTest
+@Transactional  //모든 테스트 메서드 실행 후 전부 RollBack 처리
 class QnaMapperTest {
 
 	@Autowired
 	private QnaMapper qnaMapper;
 	
 	@Test
+	@Rollback(false) //메서드 실행 후 RollBack하지 않음
 	void getDetailTest()throws Exception{
 		QnaVO qnaVO = new QnaVO();
 		qnaVO.setBoardNum(110L);
@@ -25,7 +29,7 @@ class QnaMapperTest {
 		assertNotNull(qnaVO);
 	}
 	
-	//@Test
+	@Test
 	void addTest()throws Exception{
 		for(int i=4;i<110;i++) {
 			QnaVO qnaVO = new QnaVO();
