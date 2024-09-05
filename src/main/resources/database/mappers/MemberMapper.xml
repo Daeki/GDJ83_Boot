@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.winter.app.members.MemberMapper">
+	<insert id="add" parameterType="MemberVO">
+		INSERT INTO MEMBERS 
+		VALUES(#{username}, #{password}, #{name}, #{email}, #{birth}, 1)
+	</insert>
+	
+	<select id="detail" parameterType="MemberVO" resultMap="detailResult">
+		SELECT * 
+		FROM MEMBERS M
+			 INNER JOIN
+			 MEMBER_ROLE MR
+			 ON M.USERNAME=MR.USERNAME
+			 INNER JOIN
+			 ROLE R
+			 ON MR.ROLE_NUM=R.ROLE_NUM
+		
+		WHERE M.USERNAME=#{username}
+	</select>
+	
+	<resultMap type="MemberVO" id="detailResult">
+		<id property="username" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="date" column="DATE"/>
+		<result property="enabled" column="ENABLED"/>
+		<collection property="vos" javaType="java.util.List" ofType="RoleVO">
+			<id property="roleNum" column="ROLE_NUM"/>
+			<result property="roleName" column="ROLE_NAME"/>
+		</collection>
+	
+	</resultMap>
+	
+	<insert id="addRole" parameterType="java.util.Map">
+		INSERT INTO MEMBER_ROLE
+		VALUES(#{username}, #{roleNum})
+	</insert>
+	
+</mapper>  

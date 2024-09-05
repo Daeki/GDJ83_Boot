@@ -51,6 +51,7 @@ public class QnaService {
 			if(mf==null || mf.isEmpty()) {
 				continue;
 			}
+			
 			String fileName = fileManager.fileSave(upload+name, mf);//D:/upload/qna
 			
 			QnaFileVO qnaFileVO = new QnaFileVO();

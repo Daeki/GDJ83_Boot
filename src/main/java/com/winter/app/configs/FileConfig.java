@@ -3,6 +3,7 @@ package com.winter.app.configs;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -30,4 +31,6 @@ public class FileConfig implements WebMvcConfigurer {
 		registry.addResourceHandler(url)
 				.addResourceLocations(file);
 	}
+	
+
 }
