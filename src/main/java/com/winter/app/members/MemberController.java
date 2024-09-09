@@ -2,11 +2,15 @@ package com.winter.app.members;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/member/*")
@@ -17,11 +21,21 @@ public class MemberController {
 	
 	//add
 	@GetMapping("add")
-	public void add()throws Exception{}
+	public void add(MemberVO memberVO)throws Exception{
+		//model.addAttribute("memberVO", new MemberVO());
+	}
 	
 	@PostMapping("add")
-	public String add(MemberVO memberVO)throws Exception{
-		int result = memberService.add(memberVO);
+	public String add(@Valid MemberVO memberVO, BindingResult bindingResult)throws Exception{
+		boolean check = memberService.memberValidate(memberVO, bindingResult);
+		if(check) {
+			return "member/add";
+		}
+//		if(bindingResult.hasErrors()) {
+//			return "member/add";
+//		}
+		
+		//int result = memberService.add(memberVO);
 		
 		return "redirect:../";
 	}

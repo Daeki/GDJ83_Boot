@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,33 +13,51 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<form method="post">
+				<form:form method="post" modelAttribute="memberVO">
 				  <div class="mb-3">
 				    <label for="username" class="form-label">ID</label>
-				    <input type="text" class="form-control" id="username" name="username">
+				    <form:input cssClass="form-control" id="username" path="username" />
+				    <div>
+				    	<form:errors path="username"></form:errors>
+				    </div>
 				  </div>
 				  <div class="mb-3">
 				    <label for="password" class="form-label">Password</label>
-				    <input type="password" class="form-control" id="password" name="password">
+				    <form:password cssClass="form-control" id="password" path="password" />
+				    <div>
+				    	<form:errors path="password"></form:errors>
+				    </div>				    
 				  </div>
 				  <div class="mb-3">
 				    <label for="passwordCheck" class="form-label">Password</label>
-				    <input type="password" class="form-control" id="passwordCheck" name="passwordCheck">
+				    <form:password cssClass="form-control" id="password" path="passwordCheck" />
+				    <div>
+				    	<form:errors path="passwordCheck"></form:errors>
+				    </div>	
 				  </div>
 
 				  <div class="mb-3">
 				    <label for="name" class="form-label">NAME</label>
-				    <input type="text" class="form-control" id="name" name="name">
+				    <form:input cssClass="form-control" id="name" path="name" />
+				    <div>
+				    	<form:errors path="name"></form:errors>
+				    </div>					    
 				  </div>
 				  
 				  <div class="mb-3">
 				    <label for="email" class="form-label">EMAIL</label>
-				    <input type="text" class="form-control" id="email" name="email">
+				    <form:input cssClass="form-control" id="email" path="email" />
+				    <div>
+				    	<form:errors path="email"></form:errors>
+				    </div>					    
 				  </div>
 				  
 				  <div class="mb-3">
 				    <label for="birth" class="form-label">BIRTH</label>
-				    <input type="date" class="form-control" id="birth" name="birth">
+				    <form:input cssClass="form-control" id="birth" path="birth" />
+				    <div>
+				    	<form:errors path="birth"></form:errors>
+				    </div>					    
 				  </div>				  				  
 				  				  
 				  <div class="mb-3 form-check">
@@ -46,7 +65,7 @@
 				    <label class="form-check-label" for="exampleCheck1">Check me out</label>
 				  </div>
 				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form>
+				</form:form>
 			
 			</div>
 		
