@@ -3,6 +3,9 @@ package com.winter.app.members;
 import java.sql.Date;
 import java.util.List;
 
+import com.winter.app.validate.MemberAddGroup;
+import com.winter.app.validate.MemberUpdateGroup;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -13,19 +16,21 @@ import lombok.Data;
 @Data
 public class MemberVO {
 	
-	@NotBlank
+	@NotBlank(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private String username;
 	
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\\\\\W)(?=\\\\\\\\S+$).{6,12}")
+	
+	@Pattern(groups = {MemberAddGroup.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\\\\\W)(?=\\\\\\\\S+$).{6,12}")
+	@NotBlank(groups = {MemberAddGroup.class})
 	private String password;
 	
 	private String passwordCheck;
 	
-	@NotBlank
+	@NotBlank(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private String name;
-	@Email
+	@Email(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private String email;
-	@Past
+	@Past(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private Date birth;
 	private boolean enabled;
 	private List<RoleVO> vos;
