@@ -41,4 +41,8 @@
 		VALUES(#{username}, #{roleNum})
 	</insert>
 	
+	<update id="pwUpdate" parameterType="MemberVO">
+		UPDATE MEMBERS SET PASSWORD=#{password} WHERE USERNAME=#{username}
+	</update>
+	
 </mapper>  

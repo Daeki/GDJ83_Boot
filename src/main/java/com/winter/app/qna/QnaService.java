@@ -46,26 +46,28 @@ public class QnaService {
 			throw new Exception();
 		}
 		
-		//파일을 HDD에 저장 후 DB에 정보를 추가
-		for(MultipartFile mf: attaches) {
-			if(mf==null || mf.isEmpty()) {
-				continue;
+//		//파일을 HDD에 저장 후 DB에 정보를 추가
+		if(attaches != null) {
+			for(MultipartFile mf: attaches) {
+				if(mf==null || mf.isEmpty()) {
+					continue;
+				}
+				
+				String fileName = fileManager.fileSave(upload+name, mf);//D:/upload/qna
+				
+				QnaFileVO qnaFileVO = new QnaFileVO();
+				qnaFileVO.setFileName(fileName);
+				qnaFileVO.setOriName(mf.getOriginalFilename());
+				qnaFileVO.setBoardNum(qnaVO.getBoardNum());
+				
+				result = qnaMapper.addFile(qnaFileVO);
+				
 			}
-			
-			String fileName = fileManager.fileSave(upload+name, mf);//D:/upload/qna
-			
-			QnaFileVO qnaFileVO = new QnaFileVO();
-			qnaFileVO.setFileName(fileName);
-			qnaFileVO.setOriName(mf.getOriginalFilename());
-			qnaFileVO.setBoardNum(qnaVO.getBoardNum());
-			
-			result = qnaMapper.addFile(qnaFileVO);
-			
 		}
 		
 		
 		
-		return 0;// result;
+		return result;
 	}
 	
 	public QnaVO getDetail(QnaVO qnaVO)throws Exception{
