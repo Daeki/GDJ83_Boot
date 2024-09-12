@@ -37,7 +37,7 @@ public class MemberUserService extends DefaultOAuth2UserService  implements User
 		OAuth2User auth2User=super.loadUser(userRequest);
 		
 		if(sns.equals("kakao")) {
-			 auth2User =  this.useKakao(auth2User);
+			 auth2User =  this.useKakao(userRequest);
 		}
 		if(sns.equals("naver")) {
 			
@@ -46,7 +46,9 @@ public class MemberUserService extends DefaultOAuth2UserService  implements User
 		return auth2User;
 	}
 	
-	private OAuth2User useKakao(OAuth2User auth2User) throws OAuth2AuthenticationException{
+	private OAuth2User useKakao(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
+		OAuth2User auth2User = super.loadUser(userRequest);
+		
 		log.error("================================================");
 		log.error("ID : {} ", auth2User.getName());
 		log.error("Attributes : {} ", auth2User.getAttributes());
@@ -57,6 +59,11 @@ public class MemberUserService extends DefaultOAuth2UserService  implements User
 		log.error("properties : {} ", properties);
 		
 		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setAccessToken(userRequest.getAccessToken().getTokenValue());
+		memberVO.setSns(userRequest.getClientRegistration().getRegistrationId());
+		memberVO.setAttirbutes(attributes);
+		
 		memberVO.setUsername(auth2User.getName());
 		memberVO.setName(properties.get("nickname").toString());
 		

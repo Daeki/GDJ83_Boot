@@ -31,6 +31,8 @@
 		<c:forEach items="${member.vos}" var="r">
 			<h3>${r.roleName}</h3>
 		</c:forEach>
+		
+		<a href="/member/logout">logout</a>
 	</sec:authorize>
 	
 	<sec:authorize access="hasRole('ADMIN')">
