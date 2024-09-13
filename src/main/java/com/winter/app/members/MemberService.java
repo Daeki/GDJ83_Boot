@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class MemberService implements UserDetailsService {
+public class MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
@@ -24,11 +24,7 @@ public class MemberService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 	//검증 메서드
@@ -60,7 +56,9 @@ public class MemberService implements UserDetailsService {
 	}
 	
 	public int add(MemberVO memberVO) throws Exception{
+		
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
 		int result =memberMapper.add(memberVO);
 		
 		Map<String, Object> map = new HashMap<>();
